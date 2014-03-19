@@ -10,12 +10,6 @@
 			"email": "juf.halli@gmail.com"
 		}
 	],
-    "repositories": [
-        {
-            "type":"git",
-            "url": "https://github.com/bloody-hell/star-rating"
-        }
-    ],
 	"minimum-stability": "dev",
 	"require": {
 		"yiisoft/yii2": "master",
