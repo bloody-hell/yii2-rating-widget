@@ -10,9 +10,24 @@
 			"email": "juf.halli@gmail.com"
 		}
 	],
+    "repositories": [
+        {
+            "type":"package",
+            "package":{
+                "name":"fyneworks/jquery-star-rating",
+                "version":"4.11",
+                "source":{
+                    "type":"git",
+                    "url":"https://github.com/Fyneworks-jQuery/star-rating",
+                    "reference":"master"
+                }
+            }
+        }
+    ],
 	"minimum-stability": "dev",
 	"require": {
-		"yiisoft/yii2": "*"
+		"yiisoft/yii2": "master",
+        "fyneworks/jquery-star-rating": "*"
 	},
 	"autoload": {
 		"psr-4": {
