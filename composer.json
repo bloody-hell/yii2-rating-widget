@@ -12,16 +12,8 @@
 	],
     "repositories": [
         {
-            "type":"package",
-            "package":{
-                "name":"fyneworks/jquery-star-rating",
-                "version":"4.11",
-                "source":{
-                    "type":"git",
-                    "url":"https://github.com/Fyneworks-jQuery/star-rating",
-                    "reference":"master"
-                }
-            }
+            "type":"git",
+            "url": "https://github.com/bloody-hell/star-rating"
         }
     ],
 	"minimum-stability": "dev",
