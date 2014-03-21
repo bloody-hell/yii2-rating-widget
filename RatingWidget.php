@@ -55,7 +55,7 @@ class RatingWidget extends InputWidget
             $this->value = $this->model->{$this->attribute};
         }
 
-        $this->value = max(ceil($this->value / floatval($this->step)) * $this->step, $this->min + $this->step);
+        $this->value = ceil($this->value / floatval($this->step)) * $this->step;
 
         $current = $this->min + $this->step;
 
