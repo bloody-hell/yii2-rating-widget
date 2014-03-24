@@ -3,6 +3,8 @@ namespace bloody_hell\rating;
 
 use yii\helpers\Html;
 use yii\helpers\Json;
+use yii\helpers\Url;
+use yii\web\JsExpression;
 use yii\widgets\InputWidget;
 
 class RatingWidget extends InputWidget
@@ -18,6 +20,13 @@ class RatingWidget extends InputWidget
     public $readOnly = false;
 
     public $cancelTitle = false;
+
+    public $url = false;
+
+    /**
+     * @var JsExpression
+     */
+    public $callback = null;
 
     protected function getSplitValue()
     {
@@ -37,11 +46,30 @@ class RatingWidget extends InputWidget
 
     protected function getPluginOptions()
     {
+        if($this->url){
+            $callback = new JsExpression('function(value, link){
+                $.ajax({
+                    url: "' . Url::toRoute($this->url) . '",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        rating: value
+                    },
+                    success: function(data){'.($this->callback ? '
+                        ('.$this->callback.')(value, link, data);
+                    ' : '').'}
+                });
+            }');
+        } else {
+            $callback = $this->callback;
+        }
+
         return [
             'readOnly'  => $this->readOnly,
             'split'     => $this->getSplitValue(),
             'cancel'    => $this->cancelTitle,
             'required'  => $this->cancelTitle === false,
+            'callback'  => $callback,
         ];
     }
 
