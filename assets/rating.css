@@ -3,4 +3,5 @@ div.vote-success{
     color: #ccc;
     font-size: 14px;
     margin-left: 5px;
+    float: left;
 }
