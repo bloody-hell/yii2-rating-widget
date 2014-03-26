@@ -96,6 +96,8 @@ class RatingWidget extends InputWidget
 
         echo Html::beginTag('div', $options);
 
+        echo Html::beginTag('div', ['class' => 'stars']);
+
         while($current <= $this->max){
 
             $this->renderInput($current);
@@ -106,6 +108,8 @@ class RatingWidget extends InputWidget
         echo Html::endTag('div');
 
         echo Html::tag('div', $this->value, ['class' => 'vote-result']);
+
+        echo Html::endTag('div');
 
         $this->getView()->registerJs('jQuery(\'#' . $this->getId() . ' input[type="radio"]\').rating('.Json::encode($this->getPluginOptions()).')');
     }
