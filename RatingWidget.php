@@ -115,7 +115,7 @@ class RatingWidget extends InputWidget
         $rounded = $this->getRoundedValue($this->value);
 
         $options = $this->inputOptions;
-        $options['value'] = $rounded;
+        $options['value'] = $value;
         if ($this->hasModel()) {
             echo Html::activeRadio($this->model, $this->attribute, $options);
         } else {
