@@ -48,6 +48,9 @@ class RatingWidget extends InputWidget
     {
         if($this->url){
             $callback = new JsExpression('function(value, link){
+                var $vote = $(\'#'.$this->id.' .vote-result\');
+                $vote.data(\'value\', value);
+                $vote.html(value);
                 $.ajax({
                     url: "' . Url::toRoute($this->url) . '",
                     type: "POST",
