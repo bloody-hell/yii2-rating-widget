@@ -1,3 +1,7 @@
+div.stars{
+    height: 20px;
+    float: left;
+}
 div.vote-result,
 div.vote-success{
     color: #ccc;
