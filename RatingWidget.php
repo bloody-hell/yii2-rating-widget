@@ -70,6 +70,15 @@ class RatingWidget extends InputWidget
             'cancel'    => $this->cancelTitle,
             'required'  => $this->cancelTitle === false,
             'callback'  => $callback,
+            'focus'     => new JsExpression('function(value, link){
+                var $vote = $(\'#'.$this->id.' .vote-result\');
+                $vote.data(\'value\', $vote.html());
+                $vote.html(value);
+            }'),
+            'blur'      => new JsExpression('function(value, link){
+                var $vote = $(\'#'.$this->id.' .vote-result\');
+                $vote.html($vote.data(\'value\'));
+            }'),
         ];
     }
 
@@ -107,7 +116,7 @@ class RatingWidget extends InputWidget
 
         echo Html::endTag('div');
 
-        echo Html::tag('div', $this->value, ['class' => 'vote-result']);
+        echo Html::tag('div', $this->value ? round($this->value,2) : null, ['class' => 'vote-result']);
 
         echo Html::endTag('div');
 
