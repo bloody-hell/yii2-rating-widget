@@ -73,8 +73,14 @@ class RatingWidget extends InputWidget
         ];
     }
 
+    protected function getRoundedValue($value)
+    {
+        return $value ? ceil($value / floatval($this->step)) * $this->step : null;
+    }
+
     public function run()
     {
+        FyneworksAsset::register($this->getView());
         RatingAsset::register($this->getView());
 
         $this->inputOptions = array_merge($this->defaultInputOptions(), $this->inputOptions);
@@ -82,8 +88,6 @@ class RatingWidget extends InputWidget
         if($this->hasModel()){
             $this->value = $this->model->{$this->attribute};
         }
-
-        $this->value = ceil($this->value / floatval($this->step)) * $this->step;
 
         $current = $this->min + $this->step;
 
@@ -101,17 +105,21 @@ class RatingWidget extends InputWidget
 
         echo Html::endTag('div');
 
+        echo Html::tag('div', $this->value, ['class' => 'vote-result']);
+
         $this->getView()->registerJs('jQuery(\'#' . $this->getId() . ' input[type="radio"]\').rating('.Json::encode($this->getPluginOptions()).')');
     }
 
     protected function renderInput($value)
     {
+        $rounded = $this->getRoundedValue($this->value);
+
         $options = $this->inputOptions;
-        $options['value'] = $value;
+        $options['value'] = $rounded;
         if ($this->hasModel()) {
             echo Html::activeRadio($this->model, $this->attribute, $options);
         } else {
-            echo Html::radio($this->name, $this->value == $value, $options);
+            echo Html::radio($this->name, $rounded == $value, $options);
         }
     }
 

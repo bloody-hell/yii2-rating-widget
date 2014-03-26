@@ -8,15 +8,19 @@ namespace bloody_hell\rating;
 
 use yii\web\AssetBundle;
 
-class RatingAsset extends AssetBundle
+class FyneworksAsset extends AssetBundle
 {
-	public $sourcePath = 'assets';
+	public $sourcePath = '@vendor/fyneworks/jquery-star-rating';
 
 	public $css = [
-		'rating.css',
+		'jquery.rating.css',
 	];
 
-	public $js = [];
+	public $js = [
+        'jquery.rating.js',
+	];
 
-	public $depends = [];
+	public $depends = [
+		'yii\web\JqueryAsset',
+	];
 }
