@@ -19,4 +19,11 @@ class RatingAsset extends AssetBundle
 	public $js = [];
 
 	public $depends = [];
+
+    public function init()
+    {
+        parent::init();
+
+        $this->sourcePath = __DIR__ . DIRECTORY_SEPARATOR . $this->sourcePath;
+    }
 }
