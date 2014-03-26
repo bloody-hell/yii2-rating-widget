@@ -2,4 +2,5 @@ div.vote-result,
 div.vote-success{
     color: #ccc;
     font-size: 14px;
+    margin-left: 5px;
 }
