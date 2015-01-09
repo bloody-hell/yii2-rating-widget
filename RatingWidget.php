@@ -47,21 +47,27 @@ class RatingWidget extends InputWidget
     protected function getPluginOptions()
     {
         if($this->url){
+            $ajaxConfig = [
+                'url'  => Url::toRoute($this->url),
+                'type' => 'POST',
+                'dataType' => 'json',
+                'data'     => [
+                    'rating' => new JsExpression('value'),
+                ],
+                'success' => $this->callback ?
+                    new JsExpression('function(data){('.$this->callback.')(value, link, data);}') :
+                    new JsExpression('function(data){}'),
+            ];
+
+            if(\Yii::$app->request->enableCsrfValidation){
+                $ajaxConfig['data'][\Yii::$app->request->csrfParam] = new JsExpression('$(\'meta[name="csrf-token"]\').attr(\'content\')');
+            }
+
             $callback = new JsExpression('function(value, link){
                 var $vote = $(\'#'.$this->id.' .vote-result\');
                 $vote.data(\'value\', value);
                 $vote.html(value);
-                $.ajax({
-                    url: "' . Url::toRoute($this->url) . '",
-                    type: "POST",
-                    dataType: "json",
-                    data: {
-                        rating: value
-                    },
-                    success: function(data){'.($this->callback ? '
-                        ('.$this->callback.')(value, link, data);
-                    ' : '').'}
-                });
+                $.ajax('.Json::encode($ajaxConfig).');
             }');
         } else {
             $callback = $this->callback;
