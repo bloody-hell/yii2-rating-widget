@@ -60,7 +60,7 @@ class RatingWidget extends InputWidget
             ];
 
             if(\Yii::$app->request->enableCsrfValidation){
-                $ajaxConfig['data'][\Yii::$app->request->csrfParam] = new JsExpression('$(\'meta[name="csrf-token"]\').attr(\'content\')');
+                $ajaxConfig['data'][\Yii::$app->request->csrfParam] = new JsExpression('yii.getCsrfToken()');
             }
 
             $callback = new JsExpression('function(value, link){
